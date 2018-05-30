@@ -748,6 +748,14 @@ void TopLevelWindow::CloseFilePreview() {
   window_->CloseFilePreview();
 }
 
+void TopLevelWindow::SetWindowControlsVisibility(bool visible) {
+  window_->SetWindowControlsVisibility(visible);
+}
+
+bool TopLevelWindow::IsWindowControlsVisible() {
+  return window_->IsWindowControlsVisible();
+}
+
 v8::Local<v8::Value> TopLevelWindow::GetParentWindow() const {
   if (parent_window_.IsEmpty())
     return v8::Null(isolate());
@@ -998,6 +1006,11 @@ void TopLevelWindow::BuildPrototype(v8::Isolate* isolate,
       .SetMethod("moveTabToNewWindow", &TopLevelWindow::MoveTabToNewWindow)
       .SetMethod("toggleTabBar", &TopLevelWindow::ToggleTabBar)
       .SetMethod("addTabbedWindow", &TopLevelWindow::AddTabbedWindow)
+
+      .SetMethod("setWindowControlsVisibility",
+                 &TopLevelWindow::SetWindowControlsVisibility)
+      .SetMethod("isWindowControlsVisible",
+                 &TopLevelWindow::IsWindowControlsVisible)
 #endif
       .SetMethod("setAutoHideMenuBar", &TopLevelWindow::SetAutoHideMenuBar)
       .SetMethod("isMenuBarAutoHide", &TopLevelWindow::IsMenuBarAutoHide)

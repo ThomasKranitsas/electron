@@ -112,6 +112,9 @@ class NativeWindowMac : public NativeWindow {
   void ToggleTabBar() override;
   bool AddTabbedWindow(NativeWindow* window) override;
 
+  void SetWindowControlsVisibility(bool visible) override;
+  bool IsWindowControlsVisible() override;
+
   void SetVibrancy(const std::string& type) override;
   void SetTouchBar(
       const std::vector<mate::PersistentDictionary>& items) override;
@@ -170,6 +173,12 @@ class NativeWindowMac : public NativeWindow {
 
   // The "titleBarStyle" option.
   TitleBarStyle title_bar_style_;
+
+  // The visibility mode of window controls set by user.
+  bool window_controls_visibility_;
+  // Flag is used to override default traffic light icons visibility behavior
+  // for simple fullscreen mode in case when user specified state explicitly.
+  bool was_window_controls_visibility_specified_;
 
   // Simple (pre-Lion) Fullscreen Settings
   bool always_simple_fullscreen_;
